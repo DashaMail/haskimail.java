@@ -1,0 +1,27 @@
+package ru.haskimail.client.data.model.message;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
+
+/**
+ * Ответ на отправку сообщения.
+ */
+public class MessageResponse extends BaseMessageResponse {
+    private String to;
+    private String cc;
+    private String bcc;
+    private Date submittedAt;
+    @JsonProperty("MessageID")
+    private String messageId;
+
+    public String getTo() { return to; }
+    public void setTo(String to) { this.to = to; }
+    public String getCc() { return cc; }
+    public void setCc(String cc) { this.cc = cc; }
+    public String getBcc() { return bcc; }
+    public void setBcc(String bcc) { this.bcc = bcc; }
+    public Date getSubmittedAt() { return submittedAt; }
+    public void setSubmittedAt(Date submittedAt) { this.submittedAt = submittedAt; }
+    public String getMessageId() { return messageId; }
+    public void setMessageId(String messageId) { this.messageId = messageId; }
+}
