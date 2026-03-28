@@ -58,6 +58,8 @@ client.deliverMessage(message);
 
 ### Отправка по шаблону
 
+> **Примечание:** API шаблонов (создание, получение, удаление) находится в разработке и пока не активен. Отправка по шаблону и получение списка шаблонов работают.
+
 ```java
 import ru.haskimail.client.data.model.templates.TemplatedMessage;
 import java.util.HashMap;
