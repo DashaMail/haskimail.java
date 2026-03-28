@@ -1,3 +1,7 @@
+<a href="https://haskimail.ru">
+    <img src="https://github.com/DashaMail/haskimail.java/raw/main/haskimail.png" alt="Haskimail Logo" title="Haskimail" width="120" height="120" align="right">
+</a>
+
 # Haskimail Java
 
 Официальная Java-библиотека для работы с [API Haskimail](https://api.haskimail.ru/) — сервиса транзакционной электронной почты.
