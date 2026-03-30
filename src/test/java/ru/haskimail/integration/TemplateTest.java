@@ -1,6 +1,5 @@
 package ru.haskimail.integration;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import ru.haskimail.client.ApiClient;
@@ -24,7 +23,6 @@ class TemplateTest extends BaseTest {
     }
 
     @Test
-    @Disabled("API: GET /templates/{id} возвращает массив вместо объекта — эндпоинт в разработке")
     @EnabledIfEnvironmentVariable(named = "HASKIMAIL_SERVER_ID", matches = ".+")
     void созданиеИУдалениеШаблона() throws Exception {
         ApiClient client = getApiClient();
@@ -39,11 +37,13 @@ class TemplateTest extends BaseTest {
         Template created = client.createTemplate(template);
         assertNotNull(created);
         assertNotNull(created.getTemplateId());
+        assertEquals(template.getName(), created.getName());
 
         // Получение
         Template fetched = client.getTemplate(created.getTemplateId());
         assertNotNull(fetched);
-        assertEquals(created.getTemplateId(), fetched.getTemplateId());
+        assertEquals(template.getName(), fetched.getName());
+        assertEquals(template.getSubject(), fetched.getSubject());
 
         // Удаление
         client.deleteTemplate(created.getTemplateId());

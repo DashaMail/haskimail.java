@@ -25,7 +25,7 @@ public class BaseMessage {
     private List<Header> headers;
     private List<Map<String, String>> attachments;
 
-    public BaseMessage() { this.setAttachments(new ArrayList<>()); }
+    public BaseMessage() { }
     public BaseMessage(String from, String to) { this(); this.from = from; this.to = to; }
     public BaseMessage(String from, String to, String subject) { this(from, to); this.subject = subject; }
     public BaseMessage(String from, String to, String subject, String htmlBody) { this(from, to, subject); this.htmlBody = htmlBody; }

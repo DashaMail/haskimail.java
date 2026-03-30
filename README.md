@@ -14,14 +14,14 @@
 <dependency>
     <groupId>ru.haskimail</groupId>
     <artifactId>haskimail</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'ru.haskimail:haskimail:1.0.0'
+implementation 'ru.haskimail:haskimail:1.1.0'
 ```
 
 ## Быстрый старт
@@ -62,7 +62,6 @@ client.deliverMessage(message);
 
 ### Отправка по шаблону
 
-> **Примечание:** API шаблонов (создание, получение, удаление) находится в разработке и пока не активен. Отправка по шаблону и получение списка шаблонов работают.
 
 ```java
 import ru.haskimail.client.data.model.templates.TemplatedMessage;
