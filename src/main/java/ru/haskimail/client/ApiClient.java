@@ -59,7 +59,6 @@ public class ApiClient extends BaseApiClient {
     private static final String ENDPOINT_STATS_OPENS = "/stats/opens";
     private static final String ENDPOINT_STATS_OPENS_PLATFORMS = "/stats/outbound/opens/platforms";
     private static final String ENDPOINT_STATS_CLICKS = "/stats/clicks";
-    private static final String ENDPOINT_STATS_CLICKS_LOCATION = "/stats/outbound/clicks/location";
     private static final String ENDPOINT_STATS_CLICKS_PLATFORMS = "/stats/outbound/clicks/platforms";
 
     // Эндпоинты вебхуков
@@ -124,13 +123,6 @@ public class ApiClient extends BaseApiClient {
      */
     public Bounce getBounce(Integer bounceId) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_BOUNCES + "/" + bounceId), Bounce.class);
-    }
-
-    /**
-     * Получить дамп отказа доставки.
-     */
-    public BounceDump getBounceDump(Integer bounceId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_BOUNCES + "/" + bounceId + "/dump"), BounceDump.class);
     }
 
     /**
@@ -222,13 +214,6 @@ public class ApiClient extends BaseApiClient {
     }
 
     /**
-     * Получить дамп исходящего сообщения.
-     */
-    public OutboundMessageDump getMessageDump(String messageId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_MESSAGES + "/" + messageId + "/dump"), OutboundMessageDump.class);
-    }
-
-    /**
      * Получить открытия сообщений.
      */
     public OutboundMessageOpens getMessageOpens(Parameters parameters) throws HaskimailException, IOException {
@@ -312,13 +297,6 @@ public class ApiClient extends BaseApiClient {
      */
     public OutboundClickStats getClickStats(Parameters parameters) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_STATS_CLICKS + parameters), OutboundClickStats.class);
-    }
-
-    /**
-     * Получить статистику кликов по расположению.
-     */
-    public OutboundClickLocationStats getClickLocationStats(Parameters parameters) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_STATS_CLICKS_LOCATION + parameters), OutboundClickLocationStats.class);
     }
 
     /**

@@ -103,13 +103,6 @@ public class AccountApiClient extends BaseApiClient {
     }
 
     /**
-     * Обновить домен.
-     */
-    public DomainDetails setDomain(Integer domainId, Domain domain) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId), DomainDetails.class, domain);
-    }
-
-    /**
      * Удалить домен.
      */
     public RequestResponse deleteDomain(Integer domainId) throws HaskimailException, IOException {
@@ -128,13 +121,6 @@ public class AccountApiClient extends BaseApiClient {
      */
     public DomainDetails rotateDomainDKIM(Integer domainId) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId + "/rotatedkim"), DomainDetails.class);
-    }
-
-    /**
-     * Проверить Return-Path для домена.
-     */
-    public DomainDetails verifyDomainReturnPath(Integer domainId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId + "/verifyreturnpath"), DomainDetails.class);
     }
 
     /**
@@ -186,20 +172,6 @@ public class AccountApiClient extends BaseApiClient {
      */
     public RequestResponse resendSenderSignatureConfirmation(Integer signatureId) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId + "/resend"), RequestResponse.class);
-    }
-
-    /**
-     * Проверить SPF для подписи отправителя.
-     */
-    public SignatureDetails verifySenderSignatureSPF(Integer signatureId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId + "/verifyspf"), SignatureDetails.class);
-    }
-
-    /**
-     * Запросить новый DKIM для подписи отправителя.
-     */
-    public RequestResponse requestNewSenderSignatureDKIM(Integer signatureId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId + "/requestnewdkim"), RequestResponse.class);
     }
 
     // ========== Пуш шаблонов ==========
