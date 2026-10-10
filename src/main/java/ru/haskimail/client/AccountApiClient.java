@@ -115,13 +115,6 @@ public class AccountApiClient extends BaseApiClient {
     }
 
     /**
-     * Ротация DKIM для домена.
-     */
-    public DomainDetails rotateDomainDKIM(Integer domainId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId + "/rotatedkim"), DomainDetails.class);
-    }
-
-    /**
      * Проверить DKIM для домена.
      */
     public DomainDetails verifyDomainDKIM(Integer domainId) throws HaskimailException, IOException {
