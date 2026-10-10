@@ -51,14 +51,14 @@ public class ApiClient extends BaseApiClient {
     private static final String ENDPOINT_MESSAGES_CLICKS = "/messages/clicks";
 
     // Эндпоинты статистики
-    private static final String ENDPOINT_STATS = "/stats/outbound";
-    private static final String ENDPOINT_STATS_SENDS = "/stats/outbound/sends";
-    private static final String ENDPOINT_STATS_BOUNCES = "/stats/outbound/bounces";
-    private static final String ENDPOINT_STATS_SPAM = "/stats/outbound/spam";
+    private static final String ENDPOINT_STATS = "/stats";
+    private static final String ENDPOINT_STATS_SENDS = "/stats/sends";
+    private static final String ENDPOINT_STATS_BOUNCES = "/stats/bounces";
+    private static final String ENDPOINT_STATS_SPAM = "/stats/spam";
     private static final String ENDPOINT_STATS_TRACKED = "/stats/outbound/tracked";
-    private static final String ENDPOINT_STATS_OPENS = "/stats/outbound/opens";
+    private static final String ENDPOINT_STATS_OPENS = "/stats/opens";
     private static final String ENDPOINT_STATS_OPENS_PLATFORMS = "/stats/outbound/opens/platforms";
-    private static final String ENDPOINT_STATS_CLICKS = "/stats/outbound/clicks";
+    private static final String ENDPOINT_STATS_CLICKS = "/stats/clicks";
     private static final String ENDPOINT_STATS_CLICKS_LOCATION = "/stats/outbound/clicks/location";
     private static final String ENDPOINT_STATS_CLICKS_PLATFORMS = "/stats/outbound/clicks/platforms";
 

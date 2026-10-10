@@ -141,7 +141,7 @@ public class AccountApiClient extends BaseApiClient {
      * Проверить DKIM для домена.
      */
     public DomainDetails verifyDomainDKIM(Integer domainId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId + "/verifydkim"), DomainDetails.class);
+        return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId + "/verifyDkim"), DomainDetails.class);
     }
 
     // ========== Подписи отправителей ==========
