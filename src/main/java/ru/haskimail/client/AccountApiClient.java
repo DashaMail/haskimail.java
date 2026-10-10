@@ -24,7 +24,6 @@ import java.util.Map;
  * - Управления доменами
  * - Управления подписями отправителей
  * - Пуш шаблонов между серверами
- * - Удаления данных
  */
 public class AccountApiClient extends BaseApiClient {
 
@@ -32,7 +31,6 @@ public class AccountApiClient extends BaseApiClient {
     private static final String ENDPOINT_DOMAINS = "/domains";
     private static final String ENDPOINT_SENDERS = "/senders";
     private static final String ENDPOINT_TEMPLATES_PUSH = "/templates/push";
-    private static final String ENDPOINT_DATA_REMOVALS = "/data-removals";
 
     public AccountApiClient(String baseUrl, Map<String, Object> headers) {
         super(baseUrl, headers);
@@ -181,21 +179,5 @@ public class AccountApiClient extends BaseApiClient {
      */
     public TemplatesPush pushTemplates(TemplatesPushRequest request) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_TEMPLATES_PUSH), TemplatesPush.class, request);
-    }
-
-    // ========== Удаление данных ==========
-
-    /**
-     * Создать запрос на удаление данных.
-     */
-    public DataRemovalStatus createDataRemoval(DataRemoval dataRemoval) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_DATA_REMOVALS), DataRemovalStatus.class, dataRemoval);
-    }
-
-    /**
-     * Получить статус запроса на удаление данных.
-     */
-    public DataRemovalStatus getDataRemovalStatus(Integer dataRemovalId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_DATA_REMOVALS + "/" + dataRemovalId), DataRemovalStatus.class);
     }
 }
