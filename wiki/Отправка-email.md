@@ -101,18 +101,6 @@ recipients.put("Пётр Петров", "petr@test.ru");
 message.setTo(recipients);
 ```
 
-## Пакетная отправка
-
-Отправка до 500 сообщений за один вызов:
-
-```java
-List<Message> messages = new ArrayList<>();
-messages.add(new Message("от@домен.ru", "кому1@домен.ru", "Тема 1", "<p>Тело 1</p>"));
-messages.add(new Message("от@домен.ru", "кому2@домен.ru", "Тема 2", "<p>Тело 2</p>"));
-
-List<MessageResponse> responses = client.deliverMessage(messages);
-```
-
 ## Ответ на отправку
 
 Объект `MessageResponse` содержит:
