@@ -119,20 +119,6 @@ public class ApiClient extends BaseApiClient {
     }
 
     /**
-     * Получить отказ доставки по ID.
-     */
-    public Bounce getBounce(Integer bounceId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_BOUNCES + "/" + bounceId), Bounce.class);
-    }
-
-    /**
-     * Активировать отказ доставки (снять блокировку).
-     */
-    public Bounce activateBounce(Integer bounceId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_BOUNCES + "/" + bounceId + "/activate"), Bounce.class);
-    }
-
-    /**
      * Получить статистику доставки.
      */
     public DeliveryStats getDeliveryStats() throws HaskimailException, IOException {
