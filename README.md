@@ -143,7 +143,7 @@ Webhooks webhooks = client.getWebhooks(new Parameters());
 
 ## Клиент аккаунта
 
-Для операций на уровне аккаунта (управление серверами, доменами, подписями) используйте `AccountApiClient`:
+Для операций на уровне аккаунта (управление серверами и доменами) используйте `AccountApiClient`:
 
 ```java
 import ru.haskimail.Haskimail;

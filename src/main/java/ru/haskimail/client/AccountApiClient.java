@@ -22,14 +22,12 @@ import java.util.Map;
  * Предоставляет методы для:
  * - Управления серверами
  * - Управления доменами
- * - Управления подписями отправителей
  * - Пуш шаблонов между серверами
  */
 public class AccountApiClient extends BaseApiClient {
 
     private static final String ENDPOINT_SERVERS = "/servers";
     private static final String ENDPOINT_DOMAINS = "/domains";
-    private static final String ENDPOINT_SENDERS = "/senders";
     private static final String ENDPOINT_TEMPLATES_PUSH = "/templates/push";
 
     public AccountApiClient(String baseUrl, Map<String, Object> headers) {
@@ -119,50 +117,6 @@ public class AccountApiClient extends BaseApiClient {
      */
     public DomainDetails verifyDomainDKIM(Integer domainId) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_DOMAINS + "/" + domainId + "/verifyDkim"), DomainDetails.class);
-    }
-
-    // ========== Подписи отправителей ==========
-
-    /**
-     * Получить список подписей отправителей.
-     */
-    public Signatures getSenderSignatures(Parameters parameters) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_SENDERS + parameters), Signatures.class);
-    }
-
-    /**
-     * Получить подпись отправителя по ID.
-     */
-    public SignatureDetails getSenderSignatureDetails(Integer signatureId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId), SignatureDetails.class);
-    }
-
-    /**
-     * Создать подпись отправителя.
-     */
-    public SignatureDetails createSenderSignature(SignatureToCreate signature) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_SENDERS), SignatureDetails.class, signature);
-    }
-
-    /**
-     * Обновить подпись отправителя.
-     */
-    public SignatureDetails setSenderSignature(Integer signatureId, SignatureToCreate signature) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.PUT, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId), SignatureDetails.class, signature);
-    }
-
-    /**
-     * Удалить подпись отправителя.
-     */
-    public RequestResponse deleteSenderSignature(Integer signatureId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.DELETE, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId), RequestResponse.class);
-    }
-
-    /**
-     * Повторно отправить подтверждение подписи.
-     */
-    public RequestResponse resendSenderSignatureConfirmation(Integer signatureId) throws HaskimailException, IOException {
-        return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_SENDERS + "/" + signatureId + "/resend"), RequestResponse.class);
     }
 
     // ========== Пуш шаблонов ==========
