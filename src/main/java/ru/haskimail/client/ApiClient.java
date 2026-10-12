@@ -34,7 +34,9 @@ public class ApiClient extends BaseApiClient {
 
     // Эндпоинты отправки
     private static final String ENDPOINT_EMAIL = "/email";
+    private static final String ENDPOINT_EMAIL_BATCH = "/email/batch";
     private static final String ENDPOINT_EMAIL_WITH_TEMPLATE = "/email/withTemplate";
+    private static final String ENDPOINT_EMAIL_BATCH_WITH_TEMPLATES = "/email/batchWithTemplates";
 
     // Эндпоинты отказов доставки
     private static final String ENDPOINT_BOUNCES = "/bounces";
@@ -83,10 +85,25 @@ public class ApiClient extends BaseApiClient {
     }
 
     /**
+     * Отправить пакет email-сообщений.
+     */
+    public List<MessageResponse> deliverMessage(List<Message> messages) throws HaskimailException, IOException {
+        return java.util.Arrays.asList(execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_EMAIL_BATCH), MessageResponse[].class, messages));
+    }
+
+    /**
      * Отправить сообщение по шаблону.
      */
     public MessageResponse deliverMessageWithTemplate(TemplatedMessage message) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_EMAIL_WITH_TEMPLATE), MessageResponse.class, message);
+    }
+
+    /**
+     * Отправить пакет сообщений по шаблонам.
+     */
+    public List<MessageResponse> deliverMessageWithTemplate(List<TemplatedMessage> messages) throws HaskimailException, IOException {
+        String json = "{\"Messages\":" + getDataHandler().toJson(messages) + "}";
+        return java.util.Arrays.asList(execute(HttpClient.REQUEST_TYPES.POST, getEndpointUrl(ENDPOINT_EMAIL_BATCH_WITH_TEMPLATES), MessageResponse[].class, json));
     }
 
     // ========== Отказы доставки (Bounces) ==========
