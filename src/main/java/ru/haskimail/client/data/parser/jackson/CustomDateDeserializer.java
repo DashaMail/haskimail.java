@@ -22,7 +22,10 @@ public class CustomDateDeserializer extends JsonDeserializer<Date> {
             "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ",
             "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
             "EEE, dd MMM yyyy HH:mm:ss Z",
-            "EEE, d MMM yyyy HH:mm:ss Z"
+            "EEE, d MMM yyyy HH:mm:ss Z",
+            //Days[].Date в статистике по дням — дата без времени. Последним: parse() не требует
+            //разобрать строку целиком, и этот формат съел бы дату со временем, отбросив время
+            "yyyy-MM-dd"
     };
 
     @Override

@@ -2,6 +2,8 @@ package ru.haskimail.unit;
 
 import org.junit.jupiter.api.Test;
 import ru.haskimail.client.data.model.message.Message;
+import ru.haskimail.client.data.model.message.MessageResponse;
+import ru.haskimail.client.data.model.stats.OutboundSendStats;
 import ru.haskimail.client.data.parser.DataHandler;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,5 +53,21 @@ class DataHandlerTest {
         String json = dataHandler.toJson(message);
         assertTrue(json.contains("\"From\""));
         assertTrue(json.contains("\"HtmlBody\""));
+    }
+
+    @Test
+    void десериализацияДатыБезВремени() throws Exception {
+        //Статистика по дням (/stats/sends и другие) отдаёт Date как 2026-10-01
+        OutboundSendStats stats = dataHandler.fromJson("{\"Days\":[{\"Date\":\"2026-10-01\",\"Sent\":44}]}", OutboundSendStats.class);
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.setTime(stats.getDays().get(0).getDate());
+        assertEquals(2026, c.get(java.util.Calendar.YEAR));
+        assertEquals(java.util.Calendar.OCTOBER, c.get(java.util.Calendar.MONTH));
+        assertEquals(1, c.get(java.util.Calendar.DAY_OF_MONTH));
+        //а дата со временем по-прежнему разбирается вместе со временем
+        MessageResponse r = dataHandler.fromJson("{\"SubmittedAt\":\"2026-10-13 14:30:12\"}", MessageResponse.class);
+        c.setTime(r.getSubmittedAt());
+        assertEquals(14, c.get(java.util.Calendar.HOUR_OF_DAY));
+        assertEquals(30, c.get(java.util.Calendar.MINUTE));
     }
 }
