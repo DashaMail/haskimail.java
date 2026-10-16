@@ -3,6 +3,8 @@ package ru.haskimail.unit;
 import org.junit.jupiter.api.Test;
 import ru.haskimail.client.data.model.message.Message;
 import ru.haskimail.client.data.model.message.MessageResponse;
+import ru.haskimail.client.data.model.stats.OutboundClickPlatformStats;
+import ru.haskimail.client.data.model.stats.OutboundOpenPlatformStats;
 import ru.haskimail.client.data.model.stats.OutboundSendStats;
 import ru.haskimail.client.data.parser.DataHandler;
 
@@ -53,6 +55,23 @@ class DataHandlerTest {
         String json = dataHandler.toJson(message);
         assertTrue(json.contains("\"From\""));
         assertTrue(json.contains("\"HtmlBody\""));
+    }
+
+    @Test
+    void десериализацияСтатистикиПоПлатформам() throws Exception {
+        //Ответ /stats/opens/platforms и /stats/clicks/platforms: поле WebMail, а не Webmail
+        String json = "{\"Days\":[{\"Date\":\"2026-10-01\",\"Desktop\":18,\"Mobile\":21,\"WebMail\":5,\"Unknown\":1}],"
+                + "\"Desktop\":18,\"Mobile\":21,\"WebMail\":5,\"Unknown\":1}";
+        OutboundOpenPlatformStats opens = dataHandler.fromJson(json, OutboundOpenPlatformStats.class);
+        assertEquals(1, opens.getDays().size());
+        assertEquals(18, opens.getDays().get(0).getDesktop());
+        assertEquals(21, opens.getDays().get(0).getMobile());
+        assertEquals(5, opens.getDays().get(0).getWebmail());
+        assertEquals(1, opens.getDays().get(0).getUnknown());
+        assertNotNull(opens.getDays().get(0).getDate());
+
+        OutboundClickPlatformStats clicks = dataHandler.fromJson(json, OutboundClickPlatformStats.class);
+        assertEquals(5, clicks.getDays().get(0).getWebmail());
     }
 
     @Test

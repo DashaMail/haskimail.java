@@ -56,7 +56,9 @@ public class ApiClient extends BaseApiClient {
     private static final String ENDPOINT_STATS_BOUNCES = "/stats/bounces";
     private static final String ENDPOINT_STATS_SPAM = "/stats/spam";
     private static final String ENDPOINT_STATS_OPENS = "/stats/opens";
+    private static final String ENDPOINT_STATS_OPENS_PLATFORMS = "/stats/opens/platforms";
     private static final String ENDPOINT_STATS_CLICKS = "/stats/clicks";
+    private static final String ENDPOINT_STATS_CLICKS_PLATFORMS = "/stats/clicks/platforms";
 
     // Эндпоинты вебхуков
     private static final String ENDPOINT_WEBHOOKS = "/webhooks";
@@ -262,10 +264,24 @@ public class ApiClient extends BaseApiClient {
     }
 
     /**
+     * Получить статистику открытий по платформам.
+     */
+    public OutboundOpenPlatformStats getOpenPlatformStats(Parameters parameters) throws HaskimailException, IOException {
+        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_STATS_OPENS_PLATFORMS + parameters), OutboundOpenPlatformStats.class);
+    }
+
+    /**
      * Получить статистику кликов.
      */
     public OutboundClickStats getClickStats(Parameters parameters) throws HaskimailException, IOException {
         return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_STATS_CLICKS + parameters), OutboundClickStats.class);
+    }
+
+    /**
+     * Получить статистику кликов по платформам.
+     */
+    public OutboundClickPlatformStats getClickPlatformStats(Parameters parameters) throws HaskimailException, IOException {
+        return execute(HttpClient.REQUEST_TYPES.GET, getEndpointUrl(ENDPOINT_STATS_CLICKS_PLATFORMS + parameters), OutboundClickPlatformStats.class);
     }
 
     // ========== Вебхуки ==========
