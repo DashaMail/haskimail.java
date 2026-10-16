@@ -14,14 +14,14 @@
 <dependency>
     <groupId>ru.haskimail</groupId>
     <artifactId>haskimail</artifactId>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
 ### Gradle
 
 ```groovy
-implementation 'ru.haskimail:haskimail:1.2.0'
+implementation 'ru.haskimail:haskimail:1.3.0'
 ```
 
 ## Быстрый старт
